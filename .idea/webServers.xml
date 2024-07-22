@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8d4276a0-bea3-446a-a908-6306f31aa2eb" name="THLB_CRM">
+        <fileTransfer rootFolder="/var/www/html/bx-site" accessType="SFTP" host="158.160.141.126" port="22" sshConfigId="d1996c82-aa11-4329-9792-34d1d2c16a5c" sshConfig="bitrix@158.160.141.126:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
