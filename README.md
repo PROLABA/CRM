@@ -4,16 +4,15 @@
 
 ## Реализованные CRM системы
 
-* [Стомотология](http://google.com)
-* [Проект 2](http://google.com)
+* [🔗 Продакшен](/)
 
 ## Макеты
-* [🔗 Диаграмма интерфейсов](https://www.figma.com/board/ruPcvDEL0KFILHHU0a5TQ5/%D0%94%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D0%BE%D0%B2?node-id=0-1&t=twhplulsTxE6ZhQP-1)
-* [🔗 Прототипы интерфейсов](https://www.figma.com/design/G9y29acB14nWG2WTBnQm0c/%D0%9F%D1%80%D0%BE%D1%82%D0%BE%D1%82%D0%B8%D0%BF%D1%8B-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D0%BE%D0%B2?node-id=0-1&t=vbHetNIBl9ZFl1IP-1)
-* [🔗 Дизайн интерфейсов](https://www.figma.com/design/C64ICtKeLpzzdbHOdj22Kw/%D0%94%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D0%BE%D0%B2?node-id=0-1&t=mw2ayertcSPfIvJq-1)
-* [🔗 Сущности](https://www.figma.com/board/duIV581qv6gol7IVkMtVDw/Laba-CRM-%D0%A1%D1%83%D1%89%D0%BD%D0%BE%D1%81%D1%82%D0%B8?node-id=0-1&t=6kPRqgWcCI5oObZn-1)
+* [🔗 Диаграмма сущностей](https://www.figma.com/board/kRci8tfHZyFgmRcATiVcab/%D0%94%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0-%D1%81%D1%83%D1%89%D0%BD%D0%BE%D1%81%D1%82%D0%B5%D0%B9?node-id=0-1&t=aW2QlmiK2mhP1kX2-1)
+* [🔗 Техническое задание](https://docs.google.com/document/d/1GnRwewCc9kVvTC2yD3hWn8dhlM0WckB_iaEi6T9qBTk/edit)
+* [🔗 Дизайн-макет](https://www.figma.com/design/iGaQ4j0pXSR1MlE6gdJRz4/THLB-CRM?node-id=1-3&t=JVB8SU3i8J3A4sxR-1)
+* [🔗 Git](https://github.com/PROLABA/crm)
 
 ## О разработке
 1. Frontend реализован на JS-фреймворке React
 
-2. Backend реализован с помощью Bitrix-API. Сущности представлены с помощью инфоблоков
+2. Backend реализован с помощью Bitrix-API. Сущности представлены с помощью Highload-блоков
