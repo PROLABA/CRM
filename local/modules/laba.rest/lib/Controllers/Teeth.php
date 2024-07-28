@@ -24,6 +24,20 @@ class Teeth extends Controller
 			"order"  => ["ID" => "ASC"],
 			"filter" => $arFilter,
 			"limit"  => $intLimit,
+		], true);
+	}
+	public static function getSectionsListAction(): array
+	{
+		$teethList =  Actions\GetHighLoadListAction::run(
+			self::HLBL_ID, [
+			"select" => ["*"],
+			"order"  => ["ID" => "ASC"],
 		]);
+		$teethSectionsList =  Actions\GetHighLoadListAction::run(
+			HLBL_ID_TeethSections, [
+			"select" => ["*"],
+			"order"  => ["ID" => "ASC"],
+		], true);
+		return $teethSectionsList;
 	}
 }

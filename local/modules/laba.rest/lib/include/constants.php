@@ -6,6 +6,8 @@ define("LABA__REST_API_DIR", '/local/modules/laba.rest/');
 define("LABA__API_DIR", '/local/modules/laba.api/');
 define('LABA__API_URL', 'rest-api');
 define('LABA__API_SECRET_KEY', '33272501cc6f99baddb06662910e4791');
+define('LABA__AUTH_SALT', 'c1isvFdxMDdmjOlvxpecFw');
+define('PASSWORD_ARGON2ID', 'hunter2');
 define('LABA__GET_ERROR', 'GET_ERROR');
 
 // 73a5463f3cdf3cd5c6bbd76873bc730a

@@ -17,8 +17,10 @@ Loader::registerAutoLoadClasses(
 	'\\Laba\\Rest\\Controllers\\Banks' => 'lib/Controllers/Banks.php',
 	'\\Laba\\Rest\\Controllers\\Tasks' => 'lib/Controllers/Tasks.php',
 	'\\Laba\\Rest\\Controllers\\Teeth' => 'lib/Controllers/Teeth.php',
+	'\\Laba\\Rest\\Controllers\\Users' => 'lib/Controllers/User.php',
 	'\\Laba\\Rest\\Actions\\CreateHighLoadRowAction' => 'lib/Actions/Create.php',
 	'\\Laba\\Rest\\Actions\\GetHighLoadListAction' => 'lib/Actions/GetList.php',
+	'\\Laba\\Rest\\Actions\\AuthToken' => 'lib/Actions/AuthToken.php',
 	'\\Laba\\Rest\\Actions\\GetHighLoadItemAction' => 'lib/Actions/GetById.php',
 	'\\Laba\\Rest\\Actions\\UpdateHighLoadRowAction' => 'lib/Actions/UpdateById.php',
 ]);

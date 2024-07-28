@@ -57,12 +57,12 @@ function replaceToHighloadFields($arFields): array
 	return $beautifyFields;
 }
 
-function getHighloadFields($id)
+function getHighloadFields($id = 'all')
 {
 	global $USER_FIELD_MANAGER;
 
 	return $USER_FIELD_MANAGER->GetUserFields(
-		"HLBLOCK_".$id
+		($id === 'all' ? "" : "HLBLOCK_".$id)
 	);
 }
 
@@ -165,4 +165,55 @@ function checkFieldsType($highload_id, $fields)
 			]);
 		exit();
 	}
+}
+
+function parsePhotos ($hgId, array $fields): array{
+
+	$arHighFields = getHighloadFields($hgId);
+	foreach ($fields as $key => $field){
+		$ufPrimary = $arHighFields[$key];
+		if ($ufPrimary['USER_TYPE_ID'] === 'file'){
+			if ($ufPrimary['MULTIPLE'] === 'Y'){
+				$newFiles = [];
+				foreach ($field as $field_item){
+					$newFiles[] = \CFile::GetByID($field_item)->Fetch();
+				}
+				$fields[$key] = $newFiles;
+			}else{
+				$fields[$key] = \CFile::GetByID($field)->Fetch();
+			}
+		}
+	}
+	return $fields;
+}
+function parseParents ($hgId, array $fields): array{
+	$arHighFields = getHighloadFields($hgId);
+	foreach ($fields as $key => $value) {
+		$ufPrimary = $arHighFields[$key];
+		if ($ufPrimary['USER_TYPE_ID'] === 'hlblock') {
+			$parent = Actions\GetHighLoadListAction::run(
+				$ufPrimary['SETTINGS']['HLBLOCK_ID'], [
+				"select" => ["*"],
+				"filter" => ["ID" => $value]
+			])['data'];
+			$fields[$key."_PARENT"] = $parent;
+		}
+	}
+	return $fields;
+}
+
+function parseItems ($hgId, array $fields): array{
+	$arHighFields = getHighloadFields();
+	foreach ($fields as $key => $value) {
+		$ufPrimary = $arHighFields[$key];
+		if ($ufPrimary['USER_TYPE_ID'] === 'hlblock') {
+			$parent = Actions\GetHighLoadListAction::run(
+				$ufPrimary['SETTINGS']['HLBLOCK_ID'], [
+				"select" => ["*"],
+				"filter" => ["ID" => $value]
+			])['data'];
+			$fields[$key."_ITEMS"] = $parent;
+		}
+	}
+	return $fields;
 }

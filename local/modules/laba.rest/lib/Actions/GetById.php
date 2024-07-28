@@ -20,6 +20,7 @@ class GetHighLoadItemAction
 			$entityDataClass = getHlblObject($highload_id);
 			$resGet          = $entityDataClass::getById($intId)->fetch();
 			if ($resGet) {
+				$resGet = parsePhotos($highload_id, $resGet);
 				self::$response['data'] = replaceFromHighloadFields($resGet);
 			}
 			else {

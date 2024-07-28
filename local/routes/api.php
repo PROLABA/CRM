@@ -26,13 +26,57 @@ use Laba\Rest\Controllers;
 return function (RoutingConfigurator $routes) {
 	$routes->prefix(LABA__API_URL)->group(
 		function (RoutingConfigurator $routes) {
-
 			$routes->get(
 				'test',
 				function (HttpRequest $req) {
 					return (new Controllers\Order())::test(HLBL_ID_Teeth);
 				}
 			)->name('laba__test');
+
+			// USER
+			$routes->prefix('user')->group(
+				function (RoutingConfigurator $routes) {
+					// GET LIST
+					$routes->get(
+						'list',
+						function (HttpRequest $req) {
+							return (new Controllers\Users())::getListAction(
+								(array)$req->getJsonList()->getRaw('FILTER'),
+								(int)$req->getJsonList()->getRaw('LIMIT')
+							);
+						}
+					)->name('laba__get_orders_list');
+
+					// CREATE EMPTY
+					$routes->post(
+						'create',
+						function (HttpRequest $req) {
+							return (new Controllers\Users())::createAction($req->getJsonList()->getValues());
+						}
+					)->name('laba__create_empty_order');
+
+
+					// GET ONE BY ID
+					$routes->get(
+						'one/{id}',
+						fn($id) => (new Controllers\Users())::getByIdAction((int)$id)
+					)->name('laba__get_one_by_id');
+
+					// EDIT ONE BY ID
+					$routes->put(
+						'update/{id}',
+						fn($id, HttpRequest $req) => (new Controllers\Users())::updateAction((int)$id, (array)$req->getJsonList()->getValues())
+					)->name('laba__edit_one_by_id');
+
+					// LOGIN
+					$routes->get(
+						'login',
+						function (HttpRequest $req) {
+							return (new Controllers\Users())::loginAction($req->getJsonList()->getValues());
+						}
+					)->name('laba__user_login');
+				}
+			);
 
 			// ORDERS
 			$routes->prefix('orders')->group(
@@ -61,13 +105,13 @@ return function (RoutingConfigurator $routes) {
 					$routes->get(
 						'one/{id}',
 						fn($id) => (new Controllers\Order())::getByIdAction((int)$id)
-					)->name('laba__get_one_by_id');
+					)->name('laba__get_one_by_id_order');
 
 					// EDIT ONE BY ID
 					$routes->put(
 						'update/{id}',
 						fn($id, HttpRequest $req) => (new Controllers\Order())::updateAction((int)$id, (array)$req->getJsonList()->getValues())
-					)->name('laba__edit_one_by_id');
+					)->name('laba__edit_one_by_id_order');
 				}
 			);
 
@@ -102,9 +146,11 @@ return function (RoutingConfigurator $routes) {
 					)->name('laba__get_one_by_id_organization');
 
 					// EDIT ONE BY ID
-					$routes->put(
+					$routes->post(
 						'update/{id}',
-						fn($id, HttpRequest $req) => (new Controllers\Organization())::updateAction((int)$id, (array)$req->getJsonList()->getValues())
+						fn($id, HttpRequest $req) => (new Controllers\Organization())::updateAction(
+							(int)$id, array_merge(
+							$req->getPostList()->getValues(), $req->getFileList()->getValues()))
 					)->name('laba__edit_one_by_id_organization');
 				}
 			);
@@ -202,6 +248,15 @@ return function (RoutingConfigurator $routes) {
 								(array)$req->getJsonList()->getRaw('FILTER'),
 								(int)$req->getJsonList()->getRaw('LIMIT')
 							);
+						}
+					)->name('laba__get_teeth');
+
+
+					// GET SECTIONS LIST
+					$routes->get(
+						'sections_list',
+						function (HttpRequest $req) {
+							return (new Controllers\Teeth())::getSectionsListAction();
 						}
 					)->name('laba__get_teeth');
 				}
