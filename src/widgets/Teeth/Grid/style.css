@@ -1,0 +1,19 @@
+
+.swiper {
+    overflow: hidden;
+}
+
+.swiper-wrapper {
+    display: flex;
+}
+.teeth-section-col{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+@media (max-width: 1000px) {
+    .teeth-section-col{
+        width: 100%;
+    }
+}

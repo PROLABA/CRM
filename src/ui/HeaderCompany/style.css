@@ -1,0 +1,19 @@
+.header-company{
+    padding: 12px 14px;
+}
+
+.header-company-info{
+    /*overflow: hidden;*/
+}
+
+.header-company-titles{
+    transition: .1s;
+    overflow-x: hidden;
+    max-width: 165px;
+}
+.header-company-titles.collapsed-text{
+    max-width: 0;
+}
+.header-company-logo{
+    cursor: pointer;
+}

@@ -1,0 +1,22 @@
+button {
+  padding: 6px 18px;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  gap: 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  align-items: center;
+  transition: .2s;
+  border-width: 1px;
+  border-color: unset;
+  border-style: solid;
+  .icon {
+    width: 16px;
+    height: 16px;
+    svg{
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

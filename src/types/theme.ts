@@ -1,0 +1,1 @@
+export type T_Background = 'accent' | 'light' | 'white'

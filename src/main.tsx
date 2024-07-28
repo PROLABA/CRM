@@ -1,10 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import {createRoot} from "react-dom/client";
+import {
+    RouterProvider,
+} from "react-router-dom";
+import {RouterContext} from "./routes/Router.tsx";
+import './index.scss'
+import {store} from "@/store";
+import {Provider} from "react-redux";
+import {NotificationProvider} from "@/widgets/Notification";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+createRoot(document.getElementById('root')!).render(
+    <Provider store={store}>
+        <NotificationProvider>
+            <RouterProvider router={RouterContext}/>
+        </NotificationProvider>
+    </Provider>
 )

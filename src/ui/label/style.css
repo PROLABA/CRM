@@ -1,0 +1,7 @@
+.label-item{
+  padding: 5px 17px;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  border-radius: 100px;
+}
