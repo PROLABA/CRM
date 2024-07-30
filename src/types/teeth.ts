@@ -1,4 +1,4 @@
-import {I_FileBX} from "@/types/types.ts";
+import { I_FileBX } from "@/types/types.ts";
 
 export interface I_Teeth {
     ID: number,
@@ -11,15 +11,17 @@ export interface I_Teeth {
 
 export interface I_TeethSection {
     ID: number,
-    label: string,
-    items: I_Teeth[]
+    NAME: string,
+    AREA_HORIZONTALLY: "TOP" | "BOTTOM"
+    AREA_VERTICAL: "LEFT" | "RIGHT"
+    SECTION_ITEMS: I_Teeth[]
 }
 
 export interface I_TeethSectionsList {
-    rightTop: I_TeethSection,
-    leftTop: I_TeethSection,
-    rightBottom: I_TeethSection,
-    leftBottom: I_TeethSection,
+    rightTop: I_TeethSection | undefined,
+    leftTop: I_TeethSection | undefined,
+    rightBottom: I_TeethSection | undefined,
+    leftBottom: I_TeethSection | undefined,
 }
 export interface I_TeethState {
     TYPE: I_TeethStateType['LABEL']

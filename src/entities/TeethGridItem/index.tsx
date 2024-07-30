@@ -10,7 +10,7 @@ export const TeethGridItem: FC<{
     return (
         <Flex gap={5} vertical={true} align={'center'} className="teeth-grid-item">
             <div className="teeth-picture-wrap noselect">
-                <Image preview={false} fallback={"/src/assets/teeth-transparent.svg"} width={15} src={picture} className="teeth-picture-img"/>
+                <Image preview={false} fallback={"/src/assets/teeth-transparent.svg"} style={{maxHeight: "35px", maxWidth: "35px"}} src={picture} className="teeth-picture-img"/>
             </div>
             <div className="teeth-number-position noselect">{props.teeth.NUMBER_POSITION}</div>
         </Flex>

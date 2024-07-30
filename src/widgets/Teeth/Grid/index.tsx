@@ -14,20 +14,26 @@ export const TeethGridWidget: FC = teethHoc(({teethSections}) => {
 
         >
             <SwiperSlide className="teeth-section-col teeth-section-right">
-                <TeethSection teethList={teethSections.rightTop.items}
-                              key={teethSections.rightBottom.ID}
-                />
-                <TeethSection teethList={teethSections.rightBottom.items}
-                              key={teethSections.leftBottom.ID}
-                />
+                {teethSections.rightTop?.SECTION_ITEMS && <TeethSection
+										teethList={teethSections.rightTop.SECTION_ITEMS}
+										key={teethSections.rightTop.ID}
+								/>}
+
+                {teethSections.rightBottom?.SECTION_ITEMS && <TeethSection
+										teethList={teethSections.rightBottom.SECTION_ITEMS}
+										key={teethSections.rightBottom.ID}
+								/>}
             </SwiperSlide>
             <SwiperSlide className="teeth-section-col teeth-section-left">
-                <TeethSection teethList={teethSections.leftTop.items}
-                              key={teethSections.rightTop.ID}
-                />
-                <TeethSection teethList={teethSections.leftBottom.items}
-                              key={teethSections.leftTop.ID}
-                />
+                {teethSections.leftTop?.SECTION_ITEMS && <TeethSection
+										teethList={teethSections.leftTop.SECTION_ITEMS}
+										key={teethSections.leftTop.ID}
+								/>}
+
+                {teethSections.leftBottom?.SECTION_ITEMS && <TeethSection
+										teethList={teethSections.leftBottom.SECTION_ITEMS}
+										key={teethSections.leftBottom.ID}
+								/>}
             </SwiperSlide>
         </Swiper>
     )

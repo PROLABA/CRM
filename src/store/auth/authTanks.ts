@@ -1,45 +1,46 @@
 import {AsyncThunk, createAsyncThunk} from "@reduxjs/toolkit";
 import instance from "@/store/instance.ts";
-import {I_Response, I_ResponseError} from "@/types/api.ts";
-import {I_AuthState} from "@/store/auth/authSlice.ts";
+import {I_Response} from "@/types/api.ts";
+import {I_Auth} from "@/store/auth/authSlice.ts";
+import {notification} from "antd";
 
 export const userLogin: AsyncThunk<
-    I_Response<I_AuthState>,
+    I_Auth,
     {
         login: string,
         password: string
     },
-    {
-        rejectValue: I_ResponseError | unknown
-    }
-> =
-    createAsyncThunk(
-        'user/login',
-        async ({login, password}, {rejectWithValue, fulfillWithValue}) => {
-
-            try {
-                const response = await
-                    instance()
-                        .get<I_Response<I_AuthState[]>>('/user/login', {
-                            data: {
-                                LOGIN: login,
-                                PASSWORD: password
-                            }
+    object> = createAsyncThunk(
+    'user/login',
+    async ({login, password}, {rejectWithValue}) => {
+        try {
+            const {data} = await instance().post<I_Response<I_Auth>>('/user/login', {
+                LOGIN: login,
+                PASSWORD: password
+            })
+            if (data.error) {
+                if (data.data?.length) {
+                    data.data.map((e) => {
+                        notification.error({
+                            message: data.message,
+                            description: e.message,
+                            key: e.message
                         })
-                        .catch((e: I_ResponseError) => {
-                            throw new Error(e.message)
-                        })
-
-                if (response.status !== 200) {
-                    throw new Error("Server Error!");
+                    })
+                } else {
+                    notification.error({
+                        message: data.message,
+                        key: data.message
+                    })
                 }
-                if (response.data.error) {
-                    return rejectWithValue(response.data)
-                }
-                return fulfillWithValue(response.data)
-            } catch (err) {
-                return rejectWithValue(err)
+                return rejectWithValue(data)
             }
+            notification.success({
+                message: 'Добро пожаловать ' + (data.data.user ? data.data.user.NAME : '')
+            })
+            return data.data
+        } catch (error) {
+            return rejectWithValue(error)
         }
-    )
-
+    }
+)

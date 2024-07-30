@@ -30,7 +30,7 @@ export const OrderBoardPage: FC = PageHoc(() => {
                     <Button label="Распечатать"
                             background="white"
                             icon={<Print />}
-                            onClick={()=> navigate("/ordesasrs")}
+                            onClick={()=> navigate("/print")}
                     />
                     <Label label="В работе"
                            background="light"

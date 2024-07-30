@@ -1,70 +1,37 @@
-import { AsyncThunk, createAsyncThunk } from "@reduxjs/toolkit";
+import {I_Teeth, I_TeethSection} from "@/types/teeth.ts";
+import {AsyncThunk, createAsyncThunk, ThunkDispatch, UnknownAction} from "@reduxjs/toolkit";
 import instance from "@/store/instance.ts";
-import { I_Response, I_ResponseError } from "@/types/api.ts";
+import {I_Response} from "@/types/api.ts";
 
-import {I_Teeth, I_TeethSectionsList} from "@/types/teeth.ts";
-
-export const fetchTeethList: AsyncThunk<
-    I_Response<I_Teeth[]>,
-    void,
-    {
-        rejectValue: I_ResponseError | unknown
-    }
-> =
-    createAsyncThunk(
-        'teeth/fetchList',
-        async (_, { rejectWithValue, fulfillWithValue }) => {
-
+function mainThank<T>(endpoint: string): AsyncThunk<T, void, {
+    state?: unknown;
+    dispatch?: ThunkDispatch<unknown, unknown, UnknownAction> | undefined;
+    extra?: unknown;
+    rejectValue?: unknown;
+    serializedErrorType?: unknown;
+    pendingMeta?: unknown;
+    fulfilledMeta?: unknown;
+    rejectedMeta?: unknown;
+}> {
+    return createAsyncThunk<T, void, object>(
+        endpoint,
+        async (_, {rejectWithValue}) => {
             try {
-                const response = await
-                    instance()
-                        .get<I_Response<I_Teeth[]>>('/teeth/list')
-                        .catch((e: I_ResponseError) => {
-                            throw new Error(e.message)
-                        })
-
-                if (response.status !== 200) {
-                    throw new Error("Server Error!");
-                }
-                if (response.data.error) {
-                    return rejectWithValue(response.data)
-                }
-                return fulfillWithValue(response.data)
-            } catch (err) {
-                return rejectWithValue(err)
+                return await fetchData<T>(endpoint);
+            } catch (error) {
+                return rejectWithValue(error);
             }
         }
     )
+}
 
-
-export const fetchTeethSectionsList: AsyncThunk<
-    I_Response<I_TeethSectionsList>,
-    void,
-    {
-        rejectValue: I_ResponseError | unknown
+async function fetchData<T>(endpoint: string): Promise<T> {
+    const response = await instance().get<I_Response<T>>(endpoint);
+    if (response.data.error) {
+        throw response.data;
     }
-> =
-    createAsyncThunk(
-        'teeth/fetchListSections',
-        async (_, { rejectWithValue, fulfillWithValue }) => {
+    return response.data.data;
+}
 
-            try {
-                const response = await
-                    instance()
-                        .get<I_Response<I_TeethSectionsList>>('/teeth/sections_list')
-                        .catch((e: I_ResponseError) => {
-                            throw new Error(e.message)
-                        })
-
-                if (response.status !== 200) {
-                    throw new Error("Server Error!");
-                }
-                if (response.data.error) {
-                    return rejectWithValue(response.data)
-                }
-                return fulfillWithValue(response.data)
-            } catch (err) {
-                return rejectWithValue(err)
-            }
-        }
-    )
+export const getTeethSections = mainThank<I_TeethSection[]>('/teeth/sections_list');
+export const getTeethList = mainThank<I_Teeth[]>('/teeth/list');

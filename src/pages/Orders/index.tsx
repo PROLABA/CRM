@@ -1,5 +1,4 @@
 import {FC} from "react";
-import {TeethGridWidget} from "@/widgets/Teeth/Grid";
 import {ContentHeader} from "@/widgets/ContentHeader";
 import {Flex} from "antd";
 import {Label} from "@/ui/label";
@@ -7,6 +6,7 @@ import {Button} from "@/ui/Button";
 import {ReactComponent as Print} from '@/assets/print.svg'
 import {useNavigate} from "react-router-dom";
 import {PageHoc} from "@/hooks/pageHOK.tsx";
+import {TableSortableWidget} from "@/widgets/Table/Sortable";
 
 export const OrdersPage: FC = PageHoc(() => {
     const navigate = useNavigate();
@@ -30,7 +30,7 @@ export const OrdersPage: FC = PageHoc(() => {
                     />
                 </Flex>
             </ContentHeader>
-            <TeethGridWidget />
+            <TableSortableWidget entity_id={2}/>
         </>
     )
 })
