@@ -1,14 +1,9 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: OPTIONS,GET,POST");
-header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
-if (LABA__API_SECRET_KEY !== md5(getallheaders()['xxx-access-token'])) {
+[$SECRET_TOKEN, $AUTH_TOKEN] = explode('::', getallheaders()['Authorization']);
+if (LABA__API_SECRET_KEY !== md5($SECRET_TOKEN)) {
 	http_response_code(401);
 	echo json_encode(
 		[
@@ -22,6 +17,7 @@ if (LABA__API_SECRET_KEY !== md5(getallheaders()['xxx-access-token'])) {
 use Bitrix\Main\Routing\RoutingConfigurator;
 use Bitrix\Main\HttpRequest;
 use Laba\Rest\Controllers;
+use Laba\Rest\Middlewares;
 
 return function (RoutingConfigurator $routes) {
 	$routes->prefix(LABA__API_URL)->group(
@@ -35,51 +31,53 @@ return function (RoutingConfigurator $routes) {
 
 			// USER
 			$routes->prefix('user')->group(
-				function (RoutingConfigurator $routes) {
-					// GET LIST
-					$routes->get(
-						'list',
-						function (HttpRequest $req) {
-							return (new Controllers\Users())::getListAction(
-								(array)$req->getJsonList()->getRaw('FILTER'),
-								(int)$req->getJsonList()->getRaw('LIMIT')
-							);
-						}
-					)->name('laba__get_orders_list');
+					function (RoutingConfigurator $routes) {
+						// GET LIST
+						$routes->get(
+							'list',
+							function (HttpRequest $req) {
+								return (new Controllers\Users())::getListAction(
+									(array)$req->getJsonList()->getRaw('FILTER'),
+									(int)$req->getJsonList()->getRaw('LIMIT')
+								);
+							}
+						)->name('laba__get_orders_list');
 
-					// CREATE EMPTY
-					$routes->post(
-						'create',
-						function (HttpRequest $req) {
-							return (new Controllers\Users())::createAction($req->getJsonList()->getValues());
-						}
-					)->name('laba__create_empty_order');
+						// CREATE EMPTY
+						$routes->post(
+							'create',
+							function (HttpRequest $req) {
+								return (new Controllers\Users())::createAction($req->getJsonList()->getValues());
+							}
+						)->name('laba__create_empty_order');
 
 
-					// GET ONE BY ID
-					$routes->get(
-						'one/{id}',
-						fn($id) => (new Controllers\Users())::getByIdAction((int)$id)
-					)->name('laba__get_one_by_id');
+						// GET ONE BY ID
+						$routes->get(
+							'one/{id}',
+							fn($id) => (new Controllers\Users())::getByIdAction((int)$id)
+						)->name('laba__get_one_by_id');
 
-					// EDIT ONE BY ID
-					$routes->put(
-						'update/{id}',
-						fn($id, HttpRequest $req) => (new Controllers\Users())::updateAction((int)$id, (array)$req->getJsonList()->getValues())
-					)->name('laba__edit_one_by_id');
+						// EDIT ONE BY ID
+						$routes
+							->put(
+							'update/{id}',
+							fn($id, HttpRequest $req) => (new Controllers\Users())::updateAction((int)$id, (array)$req->getJsonList()->getValues())
+						)->name('laba__edit_one_by_id');
 
-					// LOGIN
-					$routes->get(
-						'login',
-						function (HttpRequest $req) {
-							return (new Controllers\Users())::loginAction($req->getJsonList()->getValues());
-						}
-					)->name('laba__user_login');
-				}
-			);
+						// LOGIN
+						$routes->post(
+							'login',
+							function (HttpRequest $req) {
+								return (new Controllers\Users())::loginAction($req->getJsonList()->getValues());
+							}
+						)->name('laba__user_login');
+					}
+				);
 
 			// ORDERS
-			$routes->prefix('orders')->group(
+			$routes
+				->prefix('orders')->group(
 				function (RoutingConfigurator $routes) {
 					// GET LIST
 					$routes->get(
@@ -117,7 +115,8 @@ return function (RoutingConfigurator $routes) {
 
 
 			// ORGANIZATION
-			$routes->prefix('organization')->group(
+			$routes
+				->prefix('organization')->group(
 				function (RoutingConfigurator $routes) {
 					// GET LIST
 					$routes->get(
@@ -150,14 +149,15 @@ return function (RoutingConfigurator $routes) {
 						'update/{id}',
 						fn($id, HttpRequest $req) => (new Controllers\Organization())::updateAction(
 							(int)$id, array_merge(
-							$req->getPostList()->getValues(), $req->getFileList()->getValues()))
+							$req->getJsonList()->getValues(), $req->getFileList()->getValues()))
 					)->name('laba__edit_one_by_id_organization');
 				}
 			);
 
 
 			// BANKS
-			$routes->prefix('banks')->group(
+			$routes
+				->prefix('banks')->group(
 				function (RoutingConfigurator $routes) {
 					// GET LIST
 					$routes->get(
@@ -195,7 +195,8 @@ return function (RoutingConfigurator $routes) {
 
 
 			// TASKS
-			$routes->prefix('tasks')->group(
+			$routes
+				->prefix('tasks')->group(
 				function (RoutingConfigurator $routes) {
 					// GET LIST
 					$routes->get(
@@ -214,7 +215,7 @@ return function (RoutingConfigurator $routes) {
 						function (HttpRequest $req) {
 							return (new Controllers\Tasks())::createAction($req->getJsonList()->getValues());
 						}
-					)->name('laba__create_tasks');
+					)->name('laba__create_bank');
 
 
 					// GET ONE BY ID
@@ -232,7 +233,8 @@ return function (RoutingConfigurator $routes) {
 			);
 
 			// TEETH
-			$routes->prefix('teeth')->group(
+			$routes
+				->prefix('teeth')->group(
 				function (RoutingConfigurator $routes) {
 					// GET ONE BY ID
 					$routes->get(

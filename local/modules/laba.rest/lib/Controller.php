@@ -40,7 +40,6 @@ class Controller {
 				throw new Exception('Пользователь не найден');
 			}
 		} catch (Exception $e) {
-			http_response_code(400);
 			echo json_encode(
 				[
 					'error'   => true,

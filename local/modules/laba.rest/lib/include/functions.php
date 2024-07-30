@@ -106,7 +106,6 @@ function issetUser($userId)
 			throw new Exception('Пользователь не найден');
 		}
 	} catch (Exception $e) {
-		http_response_code(400);
 		echo json_encode(
 			[
 				'error'   => true,
@@ -156,7 +155,6 @@ function checkFieldsType($highload_id, $fields)
 			throw new \Exception('Типы полей не соответствуют');
 		}
 	} catch (\Exception  $e) {
-		http_response_code(400);
 		echo json_encode(
 			[
 				'message' => $e->getMessage(),
@@ -167,53 +165,76 @@ function checkFieldsType($highload_id, $fields)
 	}
 }
 
-function parsePhotos ($hgId, array $fields): array{
+function getFullHostUrl()
+{
+	return ($_SERVER['HTTPS'] ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'];
+}
 
+function parsePhotos($hgId, array $fields): array
+{
 	$arHighFields = getHighloadFields($hgId);
-	foreach ($fields as $key => $field){
+	foreach ($fields as $key => $field) {
 		$ufPrimary = $arHighFields[$key];
-		if ($ufPrimary['USER_TYPE_ID'] === 'file'){
-			if ($ufPrimary['MULTIPLE'] === 'Y'){
+		if ($ufPrimary['USER_TYPE_ID'] === 'file') {
+			if ($ufPrimary['MULTIPLE'] === 'Y') {
 				$newFiles = [];
-				foreach ($field as $field_item){
+				foreach ($field as $field_item) {
 					$newFiles[] = \CFile::GetByID($field_item)->Fetch();
 				}
 				$fields[$key] = $newFiles;
-			}else{
-				$fields[$key] = \CFile::GetByID($field)->Fetch();
+			}
+			else {
+				$fields[$key]        = \CFile::GetByID($field)->Fetch();
+				$fields[$key]['SRC'] = getFullHostUrl().$fields[$key]['SRC'];
 			}
 		}
 	}
+
 	return $fields;
 }
-function parseParents ($hgId, array $fields): array{
+
+function parseParents($hgId, array $fields): array
+{
 	$arHighFields = getHighloadFields($hgId);
 	foreach ($fields as $key => $value) {
 		$ufPrimary = $arHighFields[$key];
 		if ($ufPrimary['USER_TYPE_ID'] === 'hlblock') {
-			$parent = Actions\GetHighLoadListAction::run(
+			$parent                 = Actions\GetHighLoadListAction::run(
 				$ufPrimary['SETTINGS']['HLBLOCK_ID'], [
 				"select" => ["*"],
-				"filter" => ["ID" => $value]
+				"filter" => ["ID" => $value],
 			])['data'];
 			$fields[$key."_PARENT"] = $parent;
 		}
 	}
+
 	return $fields;
 }
 
-function parseItems ($hgId, array $fields): array{
+function getChainItem($filed)
+{
+	global $hgIdGlobal;
+
+	return $filed["USER_TYPE_ID"] === 'hlblock' && $filed["SETTINGS"]["HLBLOCK_ID"] == $hgIdGlobal;
+}
+
+function parseItems($hgId, array $fields): array
+{
 	$arHighFields = getHighloadFields();
-	foreach ($fields as $key => $value) {
-		$ufPrimary = $arHighFields[$key];
-		if ($ufPrimary['USER_TYPE_ID'] === 'hlblock') {
-			$parent = Actions\GetHighLoadListAction::run(
-				$ufPrimary['SETTINGS']['HLBLOCK_ID'], [
-				"select" => ["*"],
-				"filter" => ["ID" => $value]
-			])['data'];
-			$fields[$key."_ITEMS"] = $parent;
-		}
+
+	global $hgIdGlobal;
+	$hgIdGlobal = $hgId;
+
+	$arChainFields = array_filter($arHighFields, "getChainItem");
+
+	foreach ($arChainFields as $key => $field) {
+		$fields[$key."_ITEMS"] = Actions\GetHighLoadListAction::run(
+			str_replace('HLBLOCK_', '', $field['ENTITY_ID']), [
+			"filter" => [
+				$key => $fields['ID'],
+			],
+		])['data'];
 	}
+
 	return $fields;
 }

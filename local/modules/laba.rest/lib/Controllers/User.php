@@ -29,7 +29,6 @@ class Users extends Controller
 			}
 		}
 		if (self::$response['error']) {
-			http_response_code(400);
 			self::$response['error']   = true;
 			self::$response['message'] = 'Пользователь не создан';
 
@@ -48,7 +47,6 @@ class Users extends Controller
 			]
 		);
 		if (!$resCreatedUserID) {
-			http_response_code(400);
 			self::$response['error']   = true;
 			self::$response['message'] = 'Пользователь не создан';
 			self::$response['data'][]  = [
@@ -73,7 +71,6 @@ class Users extends Controller
 			self::$response['data'] = $arUser;
 		}
 		else {
-			http_response_code(400);
 			self::$response['error']   = true;
 			self::$response['message'] = 'Пользователь не найден';
 		}
@@ -105,7 +102,6 @@ class Users extends Controller
 		$resCreatedUser = $classUser->Update($intId, $data);
 
 		if (!$resCreatedUser) {
-			http_response_code(400);
 			self::$response['error']   = true;
 			self::$response['message'] = 'Пользователь не обновлён';
 			self::$response['data'][]  = [
@@ -129,23 +125,22 @@ class Users extends Controller
 		}
 		$arAuthResult              = $USER->Login($data['LOGIN'], $data['PASSWORD']);
 		$APPLICATION->arAuthResult = $arAuthResult;
-
+		$message                   = str_replace("<br>", '', $arAuthResult['MESSAGE']);
 		if ($arAuthResult['ERROR_TYPE']) {
-			http_response_code(400);
 			self::$response['error']   = true;
-			self::$response['message'] = $arAuthResult['MESSAGE'];
+			self::$response['message'] = 'Ошибка авторизации';
 			self::$response['data'][]  = [
-				"message"    => $arAuthResult['MESSAGE'],
+				"message"    => $message,
 				"code"       => $arAuthResult['ERROR_TYPE'],
 				"customData" => $data,
 			];
 		}
 		else {
-			$token = Actions\AuthToken::create($data['LOGIN'], $data['PASSWORD']);
+			$token                  = Actions\AuthToken::create($data['LOGIN'], $data['PASSWORD']);
 			self::$response['data'] = [
-				"ID" => $USER->GetID(),
+				"ID"    => $USER->GetID(),
 				"token" => $token,
-				"data" => Actions\AuthToken::decode($token, $USER->GetID()),
+				"user"  => Actions\AuthToken::decode($token, $USER->GetID())['data'],
 			];
 		}
 

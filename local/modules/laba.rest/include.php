@@ -23,4 +23,5 @@ Loader::registerAutoLoadClasses(
 	'\\Laba\\Rest\\Actions\\AuthToken' => 'lib/Actions/AuthToken.php',
 	'\\Laba\\Rest\\Actions\\GetHighLoadItemAction' => 'lib/Actions/GetById.php',
 	'\\Laba\\Rest\\Actions\\UpdateHighLoadRowAction' => 'lib/Actions/UpdateById.php',
+	'\\Laba\\Rest\\Middlewares\\AuthMiddleware' => 'lib/Middlewares/AuthMiddleware.php',
 ]);

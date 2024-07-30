@@ -30,7 +30,6 @@ class CreateHighLoadRowAction
 				throw new Exception('Ошибка создания '.$entityDataClass::getTableName());
 			}
 		} catch (Exception $e) {
-			http_response_code(400);
 			self::$response['data']    = $resCreate->getErrors();
 			self::$response['message'] = $e->getMessage();
 			self::$response['error']   = true;

@@ -39,7 +39,6 @@ class UpdateHighLoadRowAction
 			self::$response['data']    = $resUpdate->getErrors();
 			self::$response['message'] = $e->getMessage();
 			self::$response['error']   = true;
-			http_response_code(400);
 			echo json_encode(self::$response);
 			exit();
 		}

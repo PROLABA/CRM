@@ -28,16 +28,10 @@ class Teeth extends Controller
 	}
 	public static function getSectionsListAction(): array
 	{
-		$teethList =  Actions\GetHighLoadListAction::run(
-			self::HLBL_ID, [
+		return Actions\GetHighLoadListAction::run(
+			 HLBL_ID_TeethSections, [
 			"select" => ["*"],
 			"order"  => ["ID" => "ASC"],
-		]);
-		$teethSectionsList =  Actions\GetHighLoadListAction::run(
-			HLBL_ID_TeethSections, [
-			"select" => ["*"],
-			"order"  => ["ID" => "ASC"],
-		], true);
-		return $teethSectionsList;
+		], false, true);
 	}
 }

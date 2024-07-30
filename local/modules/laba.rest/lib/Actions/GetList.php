@@ -11,11 +11,10 @@ class GetHighLoadListAction
 		$response         = [
 			'error'   => false,
 			'message' => '',
-			'data'    => null,
+			'data'    => [],
 		];
 		$entityDataClass  = getHlblObject($highload_id);
 		$resGet           = $entityDataClass::getList($data);
-		$response['data'] = [];
 		while ($row = $resGet->fetch()) {
 			$row = parsePhotos($highload_id, $row);
 			if ($isGetParent) {

@@ -1,6 +1,5 @@
-Options -Indexes 
+Options -Indexes
 ErrorDocument 404 /404.php
-
 <IfModule mod_rewrite.c>
   Options +FollowSymLinks
   RewriteEngine On
@@ -12,9 +11,7 @@ ErrorDocument 404 /404.php
   RewriteCond %{REQUEST_FILENAME} !/bitrix/routing_index.php$
   RewriteRule ^(.*)$ /bitrix/routing_index.php [L]
   RewriteRule .* - [E=REMOTE_USER:%{HTTP:Authorization}]
-
 </IfModule>
-
 
 <IfModule mod_dir.c>
   DirectoryIndex index.php index.html
@@ -26,5 +23,5 @@ ErrorDocument 404 /404.php
   ExpiresByType image/gif "access plus 3 day"
   ExpiresByType image/png "access plus 3 day"
   ExpiresByType text/css "access plus 3 day"
-  ExpiresByType application/javascript "access plus 3 day"  
+  ExpiresByType application/javascript "access plus 3 day"
 </IfModule>

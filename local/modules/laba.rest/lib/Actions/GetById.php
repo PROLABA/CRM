@@ -34,9 +34,8 @@ class GetHighLoadItemAction
 					"customData" => $intId,
 				],
 			];
-			self::$response['message'] = $e->getMessage();
+			self::$response['message'] = 'Ошибка получения '.$entityDataClass::getTableName();
 			self::$response['error']   = true;
-			http_response_code(400);
 			echo json_encode(self::$response);
 			exit();
 		}
