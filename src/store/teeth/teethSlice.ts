@@ -1,8 +1,8 @@
 import { T_PromiseStatus, I_ResponseError } from "@/types/api.ts";
 import { createSlice } from "@reduxjs/toolkit";
-import {I_Teeth, I_TeethSection} from "@/types/teeth.ts";
+import { I_Teeth, I_TeethSection } from "@/types/teeth.ts";
 
-import {getTeethList, getTeethSections} from "@/store/teeth/teethTanks.ts";
+import { getTeethList, getTeethSections } from "@/store/teeth/teethTanks.ts";
 
 export interface I_TeethState {
     teethList: I_Teeth[]
