@@ -14,14 +14,7 @@ export const TableSortableWidget: FC<{
             rowKey={'ID'}
             pagination={{
             }}
-            expandable={
-                {
-                    expandedRowRender: (record) => <Flex gap={10} justify={"center"} >
-                        <Button type="primary" >Редактировать</Button>
-                        <Button type="default" >Удалить</Button >
-                    </Flex>,
-                }
-            }
+
         >
 
         </Table >
