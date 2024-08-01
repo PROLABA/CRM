@@ -1,9 +1,9 @@
-import {I_Teeth, I_TeethSection} from "@/types/teeth.ts";
-import {AsyncThunk, createAsyncThunk, ThunkDispatch, UnknownAction} from "@reduxjs/toolkit";
+import { I_Teeth, I_TeethSection } from "@/types/teeth.ts";
+import { AsyncThunk, createAsyncThunk, ThunkDispatch, UnknownAction } from "@reduxjs/toolkit";
 import instance from "@/store/instance.ts";
-import {I_Response} from "@/types/api.ts";
+import { I_Response } from "@/types/api.ts";
 
-function mainThank<T>(endpoint: string): AsyncThunk<T, void, {
+export function mainThank<T>(endpoint: string): AsyncThunk<T, void, {
     state?: unknown;
     dispatch?: ThunkDispatch<unknown, unknown, UnknownAction> | undefined;
     extra?: unknown;
@@ -15,7 +15,7 @@ function mainThank<T>(endpoint: string): AsyncThunk<T, void, {
 }> {
     return createAsyncThunk<T, void, object>(
         endpoint,
-        async (_, {rejectWithValue}) => {
+        async (_, { rejectWithValue }) => {
             try {
                 return await fetchData<T>(endpoint);
             } catch (error) {
