@@ -14,7 +14,7 @@ export function OrderStatusHOK<WrappedProps>(
             if (orderStatusList.length === 0 && status !== 'pending') {
                 dispatch(getOrderStatusListThank({}))
             }
-        }, [dispatch, orderStatusList])
+        }, [dispatch, status, orderStatusList])
         const selectedStatus = orderStatusList.find(item => item.ID === selected) ?? orderStatusList[0]
         if (status !== 'fulfilled' || !selected || !orderStatusList) return null
         return <WrappedComponent orderStatusList={orderStatusList}

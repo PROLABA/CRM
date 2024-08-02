@@ -1,17 +1,12 @@
-import {Outlet, useNavigate} from "react-router-dom"
+import {Outlet} from "react-router-dom"
 import {ConfigProvider, ThemeConfig} from "antd";
 import './style.css'
-import {useEffect} from "react";
 import {useAppSelector} from "@/hooks/storeHooks.ts";
+import {AuthPage} from "@/pages/Auth";
 
 export const AppLayout = () => {
-    const navigate = useNavigate();
     const {token} = useAppSelector(state => state.auth)
-    useEffect(() => {
-        if (!token) {
-            navigate("/auth")
-        }
-    }, [navigate, token])
+
 
     const config: ThemeConfig = {
         token: {
@@ -26,7 +21,7 @@ export const AppLayout = () => {
 
     return (
         <ConfigProvider theme={config}>
-            <Outlet />
+            {token ? <Outlet /> : <AuthPage />}
         </ConfigProvider>
     )
 }

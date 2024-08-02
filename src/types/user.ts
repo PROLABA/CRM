@@ -1,5 +1,7 @@
+import {T_boolBX} from "@/types/api.ts";
+
 export interface I_Auth {
-    ID: string
+    ID: string | null
     token: string | null
     user: I_User | null
 }
@@ -9,6 +11,7 @@ export interface I_User {
     NAME: string
     LAST_NAME: string
     EMAIL: string
+    ACTIVE: T_boolBX
 }
 
 export type AuthFieldType = {

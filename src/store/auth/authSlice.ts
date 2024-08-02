@@ -32,7 +32,7 @@ export const authSlice = createSlice({
             state.status = 'pending'
         })
         builder.addCase(userLoginThank.fulfilled, (state, action) => {
-            if (action.payload.error || !action.payload.data.token) {
+            if (action.payload.error || !action.payload.data.token || !action.payload.data.ID) {
                 console.log(action.payload)
             } else {
                 notification.success({

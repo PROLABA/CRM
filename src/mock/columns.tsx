@@ -1,11 +1,13 @@
 import { ColumnsType } from "antd/es/table";
 import { Label } from "@/ui/label";
 import {OrderStatusLabel} from "@/ui/OrderStatus/Label";
+import {Link} from "react-router-dom";
 export const mokColumns: ColumnsType = [
     {
         title: '№',
         dataIndex: 'ID',
         key: 'ID',
+        render: (ID: string) => <Link to={ID} >{ID}</Link>,
     },
     {
         title: 'От',

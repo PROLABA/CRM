@@ -13,10 +13,10 @@ export function teethHoc<WrappedProps>(
         const {status, teethSections, teethList} = useAppSelector(state => state.teeth)
         const dispatch = useAppDispatch()
         const sortTeeth = (section: I_TeethSection | undefined, type: 'ASC' | 'DESC') => {
-            if (section && section?.SECTION_ITEMS?.length > 0) {
+            if (section && section?.ITEMS && section?.ITEMS?.SECTION.length > 0) {
                 return {
                     ...section,
-                    SECTION_ITEMS: [...section.SECTION_ITEMS].sort((a, b) => {
+                    SECTION_ITEMS: [...section.ITEMS.SECTION].sort((a, b) => {
                         return ((type === 'ASC' ? 1 : -1) *  Number(a.SECTION_POSITION)) - ((type === 'ASC' ? 1 : -1) * Number(b.SECTION_POSITION))
                     })
                 }

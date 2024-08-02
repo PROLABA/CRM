@@ -5,7 +5,7 @@ import { Label } from "@/ui/label";
 export function TableOrdersHOK<WrappedProps>(
     WrappedComponent: ComponentType<
         {
-            data: any[], columns: ColumnsType
+            data: object[], columns: ColumnsType
         }
     >
 ): FC<WrappedProps> {

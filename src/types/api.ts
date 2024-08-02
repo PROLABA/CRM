@@ -24,3 +24,5 @@ export interface I_Payload<T_Data> {
     ID?: number
     data?: T_Data
 }
+
+export type T_boolBX = "Y" | "N"

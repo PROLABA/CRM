@@ -11,17 +11,12 @@ import {WorkTypesPage} from "@/pages/Technicians";
 import {OrderBoardPage} from "@/pages/Orders/OrderBoard";
 import {ErrorPage} from "@/pages/Error";
 import {MainPage} from "@/pages/Main";
-import {AuthPage} from "@/pages/Auth";
 import {AppLayout} from "@/layouts/AppLayout";
 
 export const RouterContext = createBrowserRouter([
     {
         element: (<AppLayout />),
         children: [
-            {
-                path: "auth",
-                element: <AuthPage />
-            },
             {
                 element: (<DashboardLayout />),
                 children: [

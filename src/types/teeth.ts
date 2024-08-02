@@ -1,4 +1,4 @@
-import { I_FileBX } from "@/types/types.ts";
+import {I_FileBX} from "@/types/types.ts";
 
 export interface I_Teeth {
     ID: number,
@@ -7,6 +7,9 @@ export interface I_Teeth {
     PICTURE: I_FileBX,
     SECTION: number,
     SECTION_POSITION: number
+    JOIN?: {
+        SECTION: I_TeethSection
+    }
 }
 
 export interface I_TeethSection {
@@ -14,7 +17,9 @@ export interface I_TeethSection {
     NAME: string,
     AREA_HORIZONTALLY: "TOP" | "BOTTOM"
     AREA_VERTICAL: "LEFT" | "RIGHT"
-    SECTION_ITEMS: I_Teeth[]
+    ITEMS?: {
+        SECTION: I_Teeth[]
+    }
 }
 
 export interface I_TeethSectionsList {
@@ -23,10 +28,12 @@ export interface I_TeethSectionsList {
     rightBottom: I_TeethSection | undefined,
     leftBottom: I_TeethSection | undefined,
 }
+
 export interface I_TeethState {
     TYPE: I_TeethStateType['LABEL']
     COLOR: string
 }
+
 export interface I_TeethStateType {
     NAME: string
     LABEL: 'none' | 'stump' | 'default' | 'implant'
