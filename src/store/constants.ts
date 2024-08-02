@@ -1,0 +1,15 @@
+export const HOST = "158.160.141.126/rest-api";
+export const A_GET_ONE = "/one";
+export const A_UPDATE = "/update";
+export const A_GET_LIST = "/list";
+export const A_CREATE = "/create";
+export const A_DELETE = "/delete";
+export const A_LOGIN = "/login";
+export const R_ORDER = "/orders";
+export const R_ORGANIZATION = "/organization";
+export const R_BANKS = "/banks";
+export const R_TEETH = "/teeth";
+export const R_TASKS = "/tasks";
+export const R_USER = "/user";
+export const R_TEST = "/test";
+export const R_ORDER_STATUS = "/order-status";

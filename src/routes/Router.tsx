@@ -38,11 +38,8 @@ export const RouterContext = createBrowserRouter([
                         element: (<OrdersPage />)
                     },
                     {
-                        path: "orders/create",
-                        element: (<OrderBoardPage />),
-                    },
-                    {
                         path: "orders/:id",
+
                         element: <OrderBoardPage />,
                     },
                     {

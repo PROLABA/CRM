@@ -26,7 +26,7 @@ export const teethSlice = createSlice({
             state.status = 'pending'
         })
         builder.addCase(getTeethSections.fulfilled, (state, action) => {
-            state.teethSections = action.payload
+            state.teethSections = action.payload.data
             state.status = 'fulfilled'
         })
         builder.addCase(getTeethSections.rejected, (state, action) => {
@@ -37,7 +37,7 @@ export const teethSlice = createSlice({
             state.status = 'pending'
         })
         builder.addCase(getTeethList.fulfilled, (state, action) => {
-            state.teethList = action.payload
+            state.teethList = action.payload.data
             state.status = 'fulfilled'
         })
         builder.addCase(getTeethList.rejected, (state, action) => {

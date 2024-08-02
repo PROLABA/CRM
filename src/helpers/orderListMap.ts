@@ -1,7 +1,7 @@
 import { I_Order } from "@/types/orders";
-import { getNormalaizeDateDMY } from "./normalizeDate";
+import { getNormalizeDateDMY } from "./normalizeDate";
 
-export const mapOrderListToTable = (orderList: I_Order[]) => {
+export const mapOrderListToTable = (orderList: I_Order[]): object[] => {
     return orderList.map((order) => {
         const {
             ID,
@@ -15,18 +15,18 @@ export const mapOrderListToTable = (orderList: I_Order[]) => {
             PRICE,
             STATUS_ID
         } = order;
-        const normalizeDateCreate = getNormalaizeDateDMY(DATE_CREATE);
-        const normolizeDateTest = getNormalaizeDateDMY(DATE_TEST);
-        const normolizeDateClosed = getNormalaizeDateDMY(DATE_CLOSED);
+        const normalizeDateCreate = getNormalizeDateDMY(DATE_CREATE);
+        const normalizeDateTest = getNormalizeDateDMY(DATE_TEST);
+        const normalizeDateClosed = getNormalizeDateDMY(DATE_CLOSED);
 
         return {
             ID,
             DATE_CREATE: normalizeDateCreate,
             STATUS_ID,
-            DATE_CLOSED: normolizeDateClosed,
+            DATE_CLOSED: normalizeDateClosed,
             PAYMENT_DATE,
             PRICE,
-            DATE_TEST: normolizeDateTest,
+            DATE_TEST: normalizeDateTest,
             CLIENT_ID,
             CLIENT_USER_ID,
             PATIENT_USER_ID,

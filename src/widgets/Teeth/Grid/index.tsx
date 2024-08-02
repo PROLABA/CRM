@@ -11,7 +11,7 @@ export const TeethGridWidget: FC = teethHoc(({teethSections}) => {
                 freeMode={false}
                 direction={'horizontal'}
                 touchReleaseOnEdges={true}
-
+                className={"order-teeth-grid"}
         >
             <SwiperSlide className="teeth-section-col teeth-section-right">
                 {teethSections.rightTop?.SECTION_ITEMS && <TeethSection

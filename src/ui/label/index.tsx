@@ -7,6 +7,7 @@ export const Label: FC<{
     background: T_Background
     icon?: ReactElement
 }> = (props) => {
+    if(!props.label) return null
     return (
         <span className={`label-item bg--${props.background}`}>{props.label}</span>
     )

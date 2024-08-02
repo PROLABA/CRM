@@ -1,10 +1,10 @@
-import { I_FileBX } from "./types"
+import {I_FileBX} from "./types"
 
 export interface I_Order {
     ID: string
     ORGANIZATION_ID: string
     DATE_CREATE: string
-    STATUS_ID: string
+    STATUS_ID: number
     DATE_CLOSED: any
     DATE_TEST: any
     CREATED_USER_ID: string
@@ -37,4 +37,10 @@ export interface OrganizationIdParent {
     FACSIMILES: number[];
     LOGO: boolean
     FACSIMILES_PHOTO: I_FileBX[]
+}
+
+export interface I_OrderStatus {
+    ID: number
+    COLOR: string
+    NAME: string
 }

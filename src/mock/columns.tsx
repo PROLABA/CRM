@@ -1,5 +1,6 @@
 import { ColumnsType } from "antd/es/table";
 import { Label } from "@/ui/label";
+import {OrderStatusLabel} from "@/ui/OrderStatus/Label";
 export const mokColumns: ColumnsType = [
     {
         title: '№',
@@ -34,9 +35,8 @@ export const mokColumns: ColumnsType = [
         title: 'Готовность',
         dataIndex: 'DATE_TEST',
         key: 'DATE_TEST',
-        render: (text: string) => <Label label={text} background="accent" />,
+        render: (date: string) => <Label label={date} background={"accent"} />,
         sorter: (a, b) => (a.DATE_TEST || '').localeCompare(b.DATE_TEST || ''),
-
     },
     {
         title: 'Закрыт',
@@ -60,6 +60,6 @@ export const mokColumns: ColumnsType = [
         title: 'Статус',
         dataIndex: 'STATUS_ID',
         key: 'STATUS_ID',
-        render: (text: string) => <Label label={text} background="light" />
+        render: (selected_id: number) => <OrderStatusLabel selected_id={selected_id} />
     },
 ]

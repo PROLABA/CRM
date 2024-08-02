@@ -19,3 +19,8 @@ export interface I_ResponseSuccess<T> {
 }
 
 export type I_Response<T> = I_ResponseSuccess<T> | I_ResponseError
+
+export interface I_Payload<T_Data> {
+    ID?: number
+    data?: T_Data
+}

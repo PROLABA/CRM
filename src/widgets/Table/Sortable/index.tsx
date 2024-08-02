@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { Button, Flex, Table } from "antd";
+import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 
 export const TableSortableWidget: FC<{
     columns?: ColumnsType,
-    data?: any[],
+    data?: object[],
 }> = (props) => {
     const { columns, data } = props;
     return (

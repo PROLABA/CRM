@@ -1,3 +1,4 @@
-export const getNormalaizeDateDMY = (date: string) => {
+export const getNormalizeDateDMY = (date: string) => {
+    if(!date) return ''
     return new Date(date).toLocaleDateString()
 }

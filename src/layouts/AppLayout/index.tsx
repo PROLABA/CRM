@@ -8,7 +8,9 @@ export const AppLayout = () => {
     const navigate = useNavigate();
     const {token} = useAppSelector(state => state.auth)
     useEffect(() => {
-        navigate(token ? "/orders" : "/auth")
+        if (!token) {
+            navigate("/auth")
+        }
     }, [navigate, token])
 
     const config: ThemeConfig = {
