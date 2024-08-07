@@ -15,7 +15,7 @@ export const initialOrderState: I_OrderStatusState = {
     error: false
 }
 export const orderStatusSlice = createSlice({
-    name: 'orders',
+    name: 'orders_status',
     initialState: initialOrderState,
     reducers: {},
     extraReducers: (builder) => {

@@ -1,12 +1,15 @@
 import {ContentHeader} from "@/widgets/ContentHeader";
 import {PageHoc} from "@/hooks/pageHOK.tsx";
+import {SearchWidget} from "@/widgets/Search";
+import {TableTechnicianWidget} from "@/widgets/Table/Technician";
 
-export const WorkTypesPage = PageHoc(() => {
+export const TechniciansPage = PageHoc(() => {
     return (
         <div>
             <ContentHeader>
-                WorkTypesPage
+                <SearchWidget/>
             </ContentHeader>
+            <TableTechnicianWidget/>
         </div>
     )
 })

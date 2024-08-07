@@ -3,15 +3,16 @@ import {
 } from "react-router-dom";
 import {OrdersPage} from "@/pages/Orders";
 import {DashboardLayout} from "@/layouts/DashboardLayout";
-import {TechniciansPage} from "@/pages/WorksTypes";
+import {TasksPage} from "../pages/Tasks";
 import {ClientsPage} from "@/pages/Clients";
 import {DoctorsPage} from "@/pages/Doctors";
 import {SettingsPage} from "@/pages/Settings";
-import {WorkTypesPage} from "@/pages/Technicians";
+import {TechniciansPage} from "@/pages/Technicians";
 import {OrderBoardPage} from "@/pages/Orders/OrderBoard";
 import {ErrorPage} from "@/pages/Error";
 import {MainPage} from "@/pages/Main";
 import {AppLayout} from "@/layouts/AppLayout";
+import {ProfilePage} from "@/pages/Profile";
 
 export const RouterContext = createBrowserRouter([
     {
@@ -42,7 +43,7 @@ export const RouterContext = createBrowserRouter([
                         children: [
                             {
                                 path: "work-types",
-                                element: (<WorkTypesPage />),
+                                element: (<TasksPage />),
                             },
                             {
                                 path: "technicians",
@@ -67,7 +68,7 @@ export const RouterContext = createBrowserRouter([
                             },
                             {
                                 path: "profile",
-                                element: <SettingsPage />,
+                                element: <ProfilePage />,
                             },
                         ]
                     },

@@ -1,12 +1,12 @@
 import {FC, useEffect} from "react";
-import { Table } from "antd";
+import {Table} from "antd";
 import {useAppDispatch, useAppSelector} from "@/hooks/storeHooks.ts";
 import {getOrderListThank} from "@/store/orders/orderThanks.ts";
 import {mapOrderListToTable} from "@/helpers/orderListMap.ts";
 import {mokColumns} from "@/mock/columns.tsx";
 
-export const TableSortableWidget: FC = () => {
-    const {order: {orderList}} = useAppSelector(state => state)
+export const TableOrderWidget: FC = () => {
+    const {orderList} = useAppSelector(state => state.order)
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -19,8 +19,7 @@ export const TableSortableWidget: FC = () => {
             columns={mokColumns}
             dataSource={formattedOrderList}
             rowKey={'ID'}
-            pagination={{
-            }}
+            pagination={{}}
         />
     )
 }

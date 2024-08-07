@@ -1,3 +1,5 @@
 export interface I_Task {
-    ID: string
+    ID: number
+    NAME: string
+    USER_IDS: string
 }

@@ -9,6 +9,7 @@ export const ContentHeader: FC<{
     return (
         <Flex justify={'space-between'}
               className="content-header"
+              gap={"15px"}
         >
             {children}
         </Flex>

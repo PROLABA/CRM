@@ -3,27 +3,34 @@ import HeaderTop from "@/widgets/Header";
 import {Sidebar} from "@/widgets/Sidebar";
 import {Layout} from "antd";
 import './style.css'
-import {useAppSelector} from "@/hooks/storeHooks.ts";
+import {useAppDispatch} from "@/hooks/storeHooks.ts";
+import {useEffect} from "react";
+import {getOrderStatusListThank} from "@/store/orderStatus/orderStatusThanks.ts";
+import {DashboardHOK} from "@/hooks/DashboardHOK.tsx";
+import {getPriceTypeList} from "@/store/priceType/priceTypeTanks.ts";
 
 const {Content} = Layout;
-export const DashboardLayout = () => {
-    const {token} = useAppSelector(state => state.auth)
-    if (!token) return null
+export const DashboardLayout = DashboardHOK(() => {
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+        dispatch(getOrderStatusListThank({}))
+        dispatch(getPriceTypeList({}))
+    }, [dispatch])
     return (
         <>
             <Layout style={{
-                minHeight: '100vh',
+                height: '100vh',
                 backgroundColor: '#FFFFFF'
             }}
             >
                 <Sidebar />
-                <Layout style={{height: "100%", "minHeight": "100vh"}}>
+                <Layout>
                     <HeaderTop title={'Заголовок'} />
-                    <Content style={{padding: '0 20px', height: "100%", width: "100%"}}>
+                    <Content className={'dashboard-content'}>
                         <Outlet />
                     </Content>
                 </Layout>
             </Layout>
         </>
     )
-}
+})

@@ -6,6 +6,13 @@ export interface I_Error {
     customData?: never
 }
 
+export interface I_ListParams<Entity>{
+    limit?: number
+    filter?: Partial<Entity>
+    GET_CHILDES?: boolean
+    GET_PARENTS?: boolean
+}
+
 export interface I_ResponseError {
     error: true
     message: string

@@ -7,7 +7,7 @@ export const mokColumns: ColumnsType = [
         title: '№',
         dataIndex: 'ID',
         key: 'ID',
-        render: (ID: string) => <Link to={ID} >{ID}</Link>,
+        render: (ID: string) => <Link to={String(ID)} >{ID}</Link>,
     },
     {
         title: 'От',

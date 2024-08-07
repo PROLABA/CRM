@@ -1,6 +1,6 @@
-import {I_Teeth, I_TeethSection} from "@/types/teeth.ts";
+import {I_Teeth} from "@/types/teeth.ts";
 import {mainThank} from "@/store/mainThank.ts";
-import {A_GET_LIST, R_TEETH} from "@/store/constants.ts";
+import {A_GET_LIST, HLBL_ID_Teeth, R_HLBL} from "@/store/constants.ts";
+import {I_ListParams} from "@/types/api.ts";
 
-export const getTeethSections = mainThank<I_TeethSection[]>(`${R_TEETH}/sections_list`, "get");
-export const getTeethList = mainThank<I_Teeth[]>(`${R_TEETH}${A_GET_LIST}`, "get");
+export const getTeethList = mainThank<I_Teeth[], I_ListParams<I_Teeth>>(`${R_HLBL}/${HLBL_ID_Teeth}${A_GET_LIST}`, "POST");

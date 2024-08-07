@@ -3,10 +3,10 @@ import {I_Task} from "@/types/task.ts";
 import {I_User} from "@/types/user.ts";
 
 export interface I_Order {
-    ID: string
+    ID: number
     ORGANIZATION_ID: I_Organization['ID']
     DATE_CREATE: string
-    STATUS_ID: number
+    STATUS_ID: I_OrderStatus['ID']
     DATE_CLOSED: Date
     DATE_TEST: Date
     CREATED_USER_ID: string
@@ -33,7 +33,7 @@ export interface I_Order {
 }
 
 export interface I_Organization {
-    ID: string
+    ID: number
     NAME: string
     INN: string
     KPP: string

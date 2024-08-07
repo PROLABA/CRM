@@ -6,12 +6,13 @@ export interface I_Auth {
     user: I_User | null
 }
 export interface I_User {
-    ID: number
+    ID: string
     LOGIN: string
     NAME: string
     LAST_NAME: string
     EMAIL: string
     ACTIVE: T_boolBX
+    PERSONAL_PROFESSION?: 'Врач' | 'Техник'
 }
 
 export type AuthFieldType = {

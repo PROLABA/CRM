@@ -1,8 +1,9 @@
 import {ComponentType, FC, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "@/hooks/storeHooks.ts";
-import {getTeethList, getTeethSections} from "@/store/teeth/teethTanks.ts";
+import {getTeethList} from "@/store/teeth/teethTanks.ts";
 
 import {I_Teeth, I_TeethSection, I_TeethSectionsList} from "@/types/teeth.ts";
+import {getTeethSectionsList} from "@/store/teethSections/teethTanks.ts";
 
 export function teethHoc<WrappedProps>(
     WrappedComponent: ComponentType<
@@ -10,28 +11,36 @@ export function teethHoc<WrappedProps>(
     >
 ): FC<WrappedProps> {
     const WrapperComponent: FC<WrappedProps> = () => {
-        const {status, teethSections, teethList} = useAppSelector(state => state.teeth)
+        const {status, teethSectionsList} = useAppSelector(state => state.teethSections)
+        const {teethList} = useAppSelector(state => state.teeth)
         const dispatch = useAppDispatch()
-        const sortTeeth = (section: I_TeethSection | undefined, type: 'ASC' | 'DESC') => {
+        const sortTeeth = (section: I_TeethSection | undefined, type: 'ASC' | 'DESC'): I_TeethSection | undefined => {
             if (section && section?.ITEMS && section?.ITEMS?.SECTION.length > 0) {
                 return {
                     ...section,
-                    SECTION_ITEMS: [...section.ITEMS.SECTION].sort((a, b) => {
-                        return ((type === 'ASC' ? 1 : -1) *  Number(a.SECTION_POSITION)) - ((type === 'ASC' ? 1 : -1) * Number(b.SECTION_POSITION))
-                    })
+                    ITEMS: {
+                        SECTION: [...section.ITEMS.SECTION].sort((a, b) => {
+                            return ((type === 'ASC' ? 1 : -1) * Number(a.SECTION_POSITION)) - ((type === 'ASC' ? 1 : -1) * Number(b.SECTION_POSITION))
+                        })
+                    }
                 }
             }
+            return section
         }
         useEffect(() => {
             dispatch(getTeethList({}))
-            dispatch(getTeethSections({}))
-        }, [dispatch, getTeethList, getTeethSections])
+            dispatch(getTeethSectionsList({
+                data: {
+                    GET_CHILDES: true
+                }
+            }))
+        }, [dispatch])
 
         const teethSectionsByPosition: I_TeethSectionsList = {
-            leftBottom: sortTeeth(teethSections.find(ts => ts.AREA_VERTICAL === "LEFT" && ts.AREA_HORIZONTALLY === "BOTTOM"), 'ASC'),
-            leftTop: sortTeeth(teethSections.find(ts => ts.AREA_VERTICAL === "LEFT" && ts.AREA_HORIZONTALLY === "TOP"), 'ASC'),
-            rightBottom: sortTeeth(teethSections.find(ts => ts.AREA_VERTICAL === "RIGHT" && ts.AREA_HORIZONTALLY === "BOTTOM"), 'DESC'),
-            rightTop: sortTeeth(teethSections.find(ts => ts.AREA_VERTICAL === "RIGHT" && ts.AREA_HORIZONTALLY === "TOP"), 'DESC')
+            leftBottom: sortTeeth(teethSectionsList.find(ts => ts.AREA_VERTICAL === "LEFT" && ts.AREA_HORIZONTALLY === "BOTTOM"), 'ASC'),
+            leftTop: sortTeeth(teethSectionsList.find(ts => ts.AREA_VERTICAL === "LEFT" && ts.AREA_HORIZONTALLY === "TOP"), 'ASC'),
+            rightBottom: sortTeeth(teethSectionsList.find(ts => ts.AREA_VERTICAL === "RIGHT" && ts.AREA_HORIZONTALLY === "BOTTOM"), 'DESC'),
+            rightTop: sortTeeth(teethSectionsList.find(ts => ts.AREA_VERTICAL === "RIGHT" && ts.AREA_HORIZONTALLY === "TOP"), 'DESC')
         }
         if (status !== 'fulfilled') return null
         return <WrappedComponent

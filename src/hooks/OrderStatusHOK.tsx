@@ -1,6 +1,5 @@
-import {ComponentType, FC, useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "@/hooks/storeHooks.ts";
-import {getOrderStatusListThank} from "@/store/orderStatus/orderStatusThanks.ts";
+import {ComponentType, FC} from "react";
+import {useAppSelector} from "@/hooks/storeHooks.ts";
 import {I_OrderStatus} from "@/types/orders.ts";
 
 export function OrderStatusHOK<WrappedProps>(
@@ -9,12 +8,6 @@ export function OrderStatusHOK<WrappedProps>(
 ): FC<WrappedProps> {
     const WrapperComponent: FC<WrappedProps> = () => {
         const {orderStatusList, status} = useAppSelector(state => state.orderStatus)
-        const dispatch = useAppDispatch()
-        useEffect(() => {
-            if (orderStatusList.length === 0 && status !== 'pending') {
-                dispatch(getOrderStatusListThank({}))
-            }
-        }, [dispatch, status, orderStatusList])
         const selectedStatus = orderStatusList.find(item => item.ID === selected) ?? orderStatusList[0]
         if (status !== 'fulfilled' || !selected || !orderStatusList) return null
         return <WrappedComponent orderStatusList={orderStatusList}

@@ -1,7 +1,7 @@
 import type {ReactElement} from "react";
 
 export interface I_FileBX {
-    ID: number
+    ID: string
     TIMESTAMP_X?: string
     MODULE_ID?: string
     HEIGHT?: string
