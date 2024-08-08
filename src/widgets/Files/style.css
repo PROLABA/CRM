@@ -1,0 +1,19 @@
+.order-files {
+  border-radius: 5px;
+  background: #FFFFFF;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  justify-content: space-between;
+}
+.order-files-content{
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+.order-files-head{
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.2;
+}

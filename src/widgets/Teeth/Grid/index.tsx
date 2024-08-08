@@ -3,8 +3,9 @@ import './style.css'
 import {TeethSection} from "@/entities/TeethSection";
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {teethHoc} from "@/hooks/TeethHOK.tsx";
+import {I_Order} from "@/types/orders.ts";
 
-export const TeethGridWidget: FC = teethHoc(({teethSections}) => {
+export const TeethGridWidget: FC<{ order: I_Order }> = teethHoc(({teethSections}) => {
     return (
         <Swiper slidesPerView={"auto"}
                 spaceBetween={7}

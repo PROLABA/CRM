@@ -21,6 +21,7 @@ export const orderSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(updateOrderByIDThank.pending, (state) => {
             state.status = 'pending'
+            console.log('pe')
         })
         builder.addCase(updateOrderByIDThank.fulfilled, (state, action) => {
             if (action.payload.error) {
@@ -31,8 +32,10 @@ export const orderSlice = createSlice({
                 })
                 state.status = 'fulfilled'
             }
+            console.log('fu')
         })
         builder.addCase(updateOrderByIDThank.rejected, (state, action) => {
+            state.orderList = [...state.orderList]
             state.error = action.payload as I_ResponseError
             state.status = 'rejected'
         })

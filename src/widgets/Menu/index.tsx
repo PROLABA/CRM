@@ -31,6 +31,12 @@ export const MenuSidebar = () => {
                     onClick: () => navigate('/references/work-types')
                 },
                 {
+                    label: 'Работы операций',
+                    type: 'item',
+                    key: '/references/tasks',
+                    onClick: () => navigate('/references/tasks')
+                },
+                {
                     label: 'Техники',
                     type: 'item',
                     key: '/references/technicians',

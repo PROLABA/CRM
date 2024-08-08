@@ -13,7 +13,7 @@ import {FilesWidget} from "@/widgets/Files";
 import {TableOrderWorksWidget} from "@/widgets/Table/OrderWorks";
 import {TableOffersWidget} from "@/widgets/Table/OrderOffers";
 import {TextWidget} from "@/widgets/Text";
-import {OrderWidget} from "@/widgets/OrderForm";
+import {OrderFormWidget} from "@/widgets/OrderForm";
 import {useAppDispatch, useAppSelector} from "@/hooks/storeHooks.ts";
 import {getOrderListThank} from "@/store/orders/orderThanks.ts";
 import {I_Order} from "@/types/orders.ts";
@@ -27,7 +27,11 @@ export const OrderBoardPage: FC = PageHoc(() => {
     const [order, setOrder] = useState<I_Order | undefined>()
     useEffect(() => {
         if (orderList.length === 0) {
-            dispatch(getOrderListThank({}))
+            dispatch(getOrderListThank({
+                data: {
+                    GET_PARENTS: true
+                }
+            }))
         }
         if (id) {
             setOrder(orderList.find(o => o.ID === Number(id)))
@@ -56,15 +60,13 @@ export const OrderBoardPage: FC = PageHoc(() => {
                     />
                 </Flex>
             </ContentHeader>
-            <pre>{order?.ID}</pre>
-            <pre>{order?.DATE_CREATE}</pre>
             <div className={"order-board"}>
-                <OrderWidget />
-                <TeethGridWidget />
-                <FilesWidget />
-                <TableOrderWorksWidget />
-                <TableOffersWidget />
-                <TextWidget />
+                <OrderFormWidget order={order}/>
+                <TeethGridWidget order={order}/>
+                <FilesWidget order={order}/>
+                <TableOrderWorksWidget order={order}/>
+                <TableOffersWidget order={order}/>
+                <TextWidget order={order}/>
             </div>
         </>
     )

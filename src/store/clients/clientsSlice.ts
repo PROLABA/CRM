@@ -42,6 +42,7 @@ export const clientsSlice = createSlice({
                 })
                 state.status = 'fulfilled'
             }
+
         })
         builder.addCase(updateClientByIDThank.rejected, (state, action) => {
             state.error = action.payload as I_ResponseError

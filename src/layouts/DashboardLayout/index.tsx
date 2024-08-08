@@ -8,6 +8,7 @@ import {useEffect} from "react";
 import {getOrderStatusListThank} from "@/store/orderStatus/orderStatusThanks.ts";
 import {DashboardHOK} from "@/hooks/DashboardHOK.tsx";
 import {getPriceTypeList} from "@/store/priceType/priceTypeTanks.ts";
+import {getTeethColorsList} from "@/store/teethColors/teethColorsTanks.ts";
 
 const {Content} = Layout;
 export const DashboardLayout = DashboardHOK(() => {
@@ -15,6 +16,7 @@ export const DashboardLayout = DashboardHOK(() => {
     useEffect(() => {
         dispatch(getOrderStatusListThank({}))
         dispatch(getPriceTypeList({}))
+        dispatch(getTeethColorsList({}))
     }, [dispatch])
     return (
         <>

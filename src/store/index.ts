@@ -9,6 +9,9 @@ import clientsSlice from "@/store/clients/clientsSlice.ts";
 import priceTypeSlice from "@/store/priceType/priceTypeSlice.ts";
 import doctorsSlice from "@/store/doctors/userSlice.ts";
 import technicianSlice from "@/store/technician/userSlice.ts";
+import teethColorsSlice from "@/store/teethColors/teethColorsSlice.ts";
+import orderOffersSlice from "@/store/orderOffers/orderSlice.ts";
+import offersSlice from "@/store/offers/offersSlice.ts";
 
 const rootReducer = combineReducers(
     {
@@ -21,7 +24,10 @@ const rootReducer = combineReducers(
         client: clientsSlice,
         priceType: priceTypeSlice,
         doctors: doctorsSlice,
-        technician: technicianSlice
+        technician: technicianSlice,
+        teethColors: teethColorsSlice,
+        orderOffers: orderOffersSlice,
+        offers: offersSlice
     }
 );
 

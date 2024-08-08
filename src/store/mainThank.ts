@@ -29,6 +29,13 @@ export function mainThank<T, T_Data = object>(endpoint: string, method: AxiosReq
                 if (res.error) {
                     return rejectWithValue(res)
                 }
+                if(res.message){
+                    notification.success({
+                        message: res.message,
+                        key: res.message
+                    })
+                }
+
                 return res
             } catch (error: unknown) {
                 const res = error as I_ResponseError;

@@ -21,6 +21,7 @@
     cursor: pointer;
     transition: .3s;
     border-radius: 3px;
+    padding-bottom: 8px;
     &:hover{
         box-shadow:inset 0 0 50px 3px rgba(229,165,165,0.2);
     }

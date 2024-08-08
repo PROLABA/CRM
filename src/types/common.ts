@@ -1,4 +1,4 @@
-import type {ReactElement} from "react";
+import type { ReactElement } from "react";
 
 export interface I_FileBX {
     ID: string
@@ -20,3 +20,5 @@ export interface I_FileBX {
 }
 
 export type T_Children = ReactElement | ReactElement[] | string
+
+export type AllFieldsNever<T> = { [K in keyof T]: string | number[] | number | string[] }

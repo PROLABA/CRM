@@ -1,7 +1,7 @@
 import './style.css'
 import {Flex} from "antd";
 import {FC} from "react";
-import {T_Children} from "@/types/types.ts";
+import {T_Children} from "@/types/common";
 
 export const ContentHeader: FC<{
     children: T_Children

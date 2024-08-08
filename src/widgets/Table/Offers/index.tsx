@@ -1,15 +1,15 @@
 import {FC, useEffect} from "react";
 import {Table} from "antd";
 import {useAppDispatch, useAppSelector} from "@/hooks/storeHooks.ts";
-import {getTasksList} from "@/store/tasks/tasksTanks.ts";
-import {mapTasksListToTable} from "@/helpers/tasksListMap.ts";
+import {mapOffersListToTable} from "@/helpers/offersListMap.ts";
+import {getOffersListThank} from "@/store/offers/offersTanks.ts";
 
-export const TableTasksWidget: FC = () => {
-    const {tasksList} = useAppSelector(state => state.tasks)
+export const TableOffersWidget: FC = () => {
+    const {offersList} = useAppSelector(state => state.offers)
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(getTasksList({}))
+        dispatch(getOffersListThank({}))
     }, [dispatch])
 
     return (
@@ -26,7 +26,7 @@ export const TableTasksWidget: FC = () => {
                     title: 'Наименование'
                 }
             ]}
-            dataSource={mapTasksListToTable(tasksList)}
+            dataSource={mapOffersListToTable(offersList)}
             rowKey={'ID'}
             pagination={{}}
         />

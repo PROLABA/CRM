@@ -1,4 +1,4 @@
-import {I_FileBX} from "@/types/types.ts";
+import { I_FileBX } from "@/types/common";
 
 export interface I_Teeth {
     ID: number,
@@ -37,4 +37,8 @@ export interface I_TeethState {
 export interface I_TeethStateType {
     NAME: string
     LABEL: 'none' | 'stump' | 'default' | 'implant'
+}
+export interface I_TeethColor {
+    ID: number
+    NAME: string
 }
