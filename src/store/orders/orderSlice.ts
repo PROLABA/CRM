@@ -1,7 +1,7 @@
 import {I_ResponseError, T_PromiseStatus} from "@/types/api.ts";
 import {createSlice} from "@reduxjs/toolkit";
 import {I_Order} from "@/types/orders";
-import {createOrderThank, getOrderListThank, updateOrderByIDThank} from "./orderThanks";
+import {createOrderThank, deleteOrderByIDThank, getOrderListThank, updateOrderByIDThank} from "./orderThanks";
 
 export interface I_OrderState {
     orderList: I_Order[]
@@ -65,6 +65,12 @@ export const orderSlice = createSlice({
         builder.addCase(createOrderThank.rejected, (state, action) => {
             state.error = action.payload as I_ResponseError
             state.status = 'rejected'
+        })
+
+        builder.addCase(deleteOrderByIDThank.fulfilled, (state, action) => {
+            window.location.replace(`/orders`)
+            state.orderList = state.orderList.filter(p => p.ID != action.payload.data.ID)
+            state.status = 'fulfilled'
         })
     },
 })

@@ -36,6 +36,9 @@ export const OrderBoardPage: FC = PageHoc(() => {
         if (id) {
             setOrder(orderList.find(o => o.ID === Number(id)))
         }
+        if (!order) {
+            navigate('/orders')
+        }
     }, [dispatch, orderList, id])
     if (!id || !order) return null
     return (
@@ -61,12 +64,12 @@ export const OrderBoardPage: FC = PageHoc(() => {
                 </Flex>
             </ContentHeader>
             <div className={"order-board"}>
-                <OrderFormWidget order={order}/>
-                <TeethGridWidget order={order}/>
-                <FilesWidget order={order}/>
-                <TableOrderWorksWidget order={order}/>
-                <TableOffersWidget order={order}/>
-                <TextWidget order={order}/>
+                <OrderFormWidget order={order} />
+                <TeethGridWidget order={order} />
+                <FilesWidget order={order} />
+                <TableOrderWorksWidget order={order} />
+                <TableOffersWidget order={order} />
+                <TextWidget order={order} />
             </div>
         </>
     )

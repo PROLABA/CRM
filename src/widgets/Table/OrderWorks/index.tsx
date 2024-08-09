@@ -29,6 +29,7 @@ export const TableOrderWorksWidget: FC<{ order: I_Order }> = ({order}) => {
                     <span>Надбавка / Скидка</span>
                     <InputAsync ID={order.ID + 'EXTRA'}
                                 value={order.EXTRA}
+                                type={'number'}
                                 onChange={(newVal) => {
                                     dispatch(updateOrderByIDThank({
                                         ID: order.ID,

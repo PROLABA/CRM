@@ -1,23 +1,21 @@
 import {FC, useEffect} from "react";
 import {Table} from "antd";
 import {useAppDispatch, useAppSelector} from "@/hooks/storeHooks.ts";
-import {mapOffersListToTable} from "@/helpers/offersListMap.ts";
-import {deleteOfferByIDThank, getOffersListThank, updateOfferByIDThank} from "@/store/offers/offersTanks.ts";
-import {DeleteButton} from "@/ui/DeleteButton";
+import {
+    deletePriceTypeByIDThank,
+    getPriceTypeList,
+    updatePriceTypeByIDThank
+} from "@/store/priceType/priceTypeTanks.ts";
 import {InputAsync} from "@/ui/InputAsync";
-export const TableOffersWidget: FC = () => {
-    const {offersList} = useAppSelector(state => state.offers)
+import {DeleteButton} from "@/ui/DeleteButton";
+
+export const PriceTypesWidget: FC = () => {
+    const {priceTypeList} = useAppSelector(state => state.priceType)
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(getOffersListThank({
-            data:{
-                GET_PARENTS: true,
-                GET_CHILDES: true,
-            }
-        }))
+        dispatch(getPriceTypeList({}))
     }, [dispatch])
-
     return (
         <Table
             columns={[
@@ -35,10 +33,28 @@ export const TableOffersWidget: FC = () => {
                         type={'string'}
                         value={val}
                         onChange={(newVal) => {
-                            dispatch(updateOfferByIDThank({
+                            dispatch(updatePriceTypeByIDThank({
                                 ID: row.ID,
                                 data: {
-                                    NAME: newVal
+                                    NAME: String(newVal)
+                                }
+                            }))
+                        }}
+                    />
+                },
+                {
+                    key: 'LABEL',
+                    dataIndex: 'LABEL',
+                    title: 'Короткое имя',
+                    render: (val: string, row) => <InputAsync
+                        ID={row.ID}
+                        type={'string'}
+                        value={val}
+                        onChange={(newVal) => {
+                            dispatch(updatePriceTypeByIDThank({
+                                ID: row.ID,
+                                data: {
+                                    LABEL: newVal
                                 }
                             }))
                         }}
@@ -49,14 +65,14 @@ export const TableOffersWidget: FC = () => {
                     dataIndex: 'ID',
                     title: '',
                     render: (ID: number) => <DeleteButton onDelete={() => {
-                        dispatch(deleteOfferByIDThank({ID}))
+                        dispatch(deletePriceTypeByIDThank({ID}))
                     }}
                     />
                 }
             ]}
-            dataSource={mapOffersListToTable(offersList)}
+            dataSource={priceTypeList}
             rowKey={'ID'}
-            pagination={{}}
+            pagination={false}
         />
     )
 }

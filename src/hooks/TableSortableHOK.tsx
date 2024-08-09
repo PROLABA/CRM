@@ -43,7 +43,7 @@ export function TableOrdersHOK<WrappedProps>(
             title: 'Готовность',
             dataIndex: 'DATE_TEST',
             key: 'DATE_TEST',
-            render: (text: string) => <Label label={text} background="accent" />,
+            render: (text: string) => <Label label={text} background={"accent"} />,
             sorter: (a, b) => a.DATE_TEST.localeCompare(b.DATE_TEST),
 
         },
@@ -69,7 +69,7 @@ export function TableOrdersHOK<WrappedProps>(
             title: 'Статус',
             dataIndex: 'STATUS_ID',
             key: 'STATUS_ID',
-            render: (text: string) => <Label label={text} background="light" />
+            render: (text: string) => <Label label={text} background={"light"} />
         },
     ]
     const data = [

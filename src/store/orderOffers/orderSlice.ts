@@ -2,7 +2,7 @@ import {I_ResponseError, T_PromiseStatus} from "@/types/api.ts";
 import {createSlice} from "@reduxjs/toolkit";
 import {I_OrderOffers} from "@/types/orders";
 import {
-    createOrderOffersThank,
+    createOrderOffersThank, deleteOrderOfferByIDThank,
     getOrderOffersListThank,
     updateOrderOffersByIDThank
 } from "./orderThanks";
@@ -63,12 +63,16 @@ export const orderOffersSlice = createSlice({
         })
         builder.addCase(createOrderOffersThank.fulfilled, (state, action) => {
             state.orderOffersList = [...state.orderOffersList, action.payload.data]
-            window.location.replace(`/orders/${action.payload.data.ID}`)
             state.status = 'fulfilled'
         })
         builder.addCase(createOrderOffersThank.rejected, (state, action) => {
             state.error = action.payload as I_ResponseError
             state.status = 'rejected'
+        })
+
+        builder.addCase(deleteOrderOfferByIDThank.fulfilled, (state, action) => {
+            state.orderOffersList = state.orderOffersList.filter(p => p.ID != action.payload.data.ID)
+            state.status = 'fulfilled'
         })
     },
 })

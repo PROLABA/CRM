@@ -10,7 +10,7 @@ export const ErrorPage = PageHoc(() => {
         <div>
             <ContentHeader>
                 <Button label="На главную"
-                        background="light"
+                        background={"light"}
                         icon={<ArrowLong />}
                         onClick={()=> navigate("/")}
                 />

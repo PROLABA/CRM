@@ -1,7 +1,7 @@
-import { I_FileBX } from "./common"
-import { I_Task } from "@/types/task.ts";
-import { I_User } from "@/types/user.ts";
-import { I_Teeth } from "@/types/teeth.ts";
+import {I_FileBX} from "./common"
+import {I_Task} from "@/types/task.ts";
+import {I_User} from "@/types/user.ts";
+import {I_Teeth} from "@/types/teeth.ts";
 
 export interface I_Order {
     ID: number
@@ -36,13 +36,15 @@ export interface I_Order {
 
 export interface I_OrderOffers {
     ID: number
-    ENTITY_ID: I_Order['ID']
+    ENTITY_ID: I_Offer['ID']
     PRICE: number
     COUNT: number
     TEETH_IDS: I_Teeth['ID'][]
+    ORDER_ID: I_Order['ID']
     JOIN?: {
-        ENTITY_ID: I_Teeth
-        TEETH_ID: I_Teeth[]
+        ORDER_ID?: I_Order
+        ENTITY_ID?: I_Teeth
+        TEETH_ID?: I_Teeth[]
     }
 }
 

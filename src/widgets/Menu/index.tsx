@@ -73,6 +73,12 @@ export const MenuSidebar = () => {
                     type: 'item',
                     key: '/settings/profile',
                     onClick: () => navigate('/settings/profile')
+                },
+                {
+                    label: 'Типы цен',
+                    type: 'item',
+                    key: '/settings/price-types',
+                    onClick: () => navigate('/settings/price-types')
                 }
             ]
         }

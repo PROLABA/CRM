@@ -9,6 +9,9 @@ import {getOrderStatusListThank} from "@/store/orderStatus/orderStatusThanks.ts"
 import {DashboardHOK} from "@/hooks/DashboardHOK.tsx";
 import {getPriceTypeList} from "@/store/priceType/priceTypeTanks.ts";
 import {getTeethColorsList} from "@/store/teethColors/teethColorsTanks.ts";
+import {getOffersListThank} from "@/store/offers/offersTanks.ts";
+import {getTeethList} from "@/store/teeth/teethTanks.ts";
+import {getTeethSectionsList} from "@/store/teethSections/teethTanks.ts";
 
 const {Content} = Layout;
 export const DashboardLayout = DashboardHOK(() => {
@@ -17,6 +20,13 @@ export const DashboardLayout = DashboardHOK(() => {
         dispatch(getOrderStatusListThank({}))
         dispatch(getPriceTypeList({}))
         dispatch(getTeethColorsList({}))
+        dispatch(getOffersListThank({}))
+        dispatch(getTeethList({}))
+        dispatch(getTeethSectionsList({
+            data: {
+                GET_CHILDES: true
+            }
+        }))
     }, [dispatch])
     return (
         <>

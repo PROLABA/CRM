@@ -14,6 +14,7 @@ import {AppLayout} from "@/layouts/AppLayout";
 import {ProfilePage} from "@/pages/Profile";
 import {OffersPage} from "@/pages/Offers";
 import {TasksPage} from "@/pages/Tasks";
+import {PriceTypesPage} from "@/pages/PriceTypes";
 
 export const RouterContext = createBrowserRouter([
     {
@@ -36,7 +37,6 @@ export const RouterContext = createBrowserRouter([
                     },
                     {
                         path: "orders/:id",
-
                         element: <OrderBoardPage />,
                     },
                     {
@@ -74,6 +74,10 @@ export const RouterContext = createBrowserRouter([
                             {
                                 path: "profile",
                                 element: <ProfilePage />,
+                            },
+                            {
+                                path: "price-types",
+                                element: <PriceTypesPage />,
                             },
                         ]
                     },

@@ -50,7 +50,8 @@ export const OrderFormWidget: FC<{ order: I_Order }> = ({order}) => {
                             options={clientsList.map(o => ({
                                 title: o.NAME,
                                 label: o.NAME,
-                                value: o.ID
+                                value: o.ID,
+                                key: 'client'+o.ID
                             }))}
                         />
                     </Form.Item>
@@ -64,12 +65,14 @@ export const OrderFormWidget: FC<{ order: I_Order }> = ({order}) => {
                         <Select
                             onSelect={(CLIENT_USER_ID) => updateOrder({CLIENT_USER_ID})}
                             options={doctorsList.map(o => ({
-                                title: o.NAME,
-                                label: o.NAME,
+                                title: o.NAME + ' ' + o.LAST_NAME,
+                                label: o.NAME + ' ' + o.LAST_NAME,
                                 value: o.ID,
+                                key: 'doctor'+o.ID
                             }))}
                         />
                     </Form.Item>
+
                     <hr />
                     <Form.Item<I_Order>
                         name={'DATE_TEST'}

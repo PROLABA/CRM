@@ -1,9 +1,7 @@
-import {ComponentType, FC, useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "@/hooks/storeHooks.ts";
-import {getTeethList} from "@/store/teeth/teethTanks.ts";
+import {ComponentType, FC} from "react";
+import {useAppSelector} from "@/hooks/storeHooks.ts";
 
 import {I_Teeth, I_TeethSection, I_TeethSectionsList} from "@/types/teeth.ts";
-import {getTeethSectionsList} from "@/store/teethSections/teethTanks.ts";
 
 export function teethHoc<WrappedProps>(
     WrappedComponent: ComponentType<
@@ -13,7 +11,6 @@ export function teethHoc<WrappedProps>(
     const WrapperComponent: FC<WrappedProps> = () => {
         const {status, teethSectionsList} = useAppSelector(state => state.teethSections)
         const {teethList} = useAppSelector(state => state.teeth)
-        const dispatch = useAppDispatch()
         const sortTeeth = (section: I_TeethSection | undefined, type: 'ASC' | 'DESC'): I_TeethSection | undefined => {
             if (section && section?.ITEMS && section?.ITEMS?.SECTION.length > 0) {
                 return {
@@ -27,14 +24,6 @@ export function teethHoc<WrappedProps>(
             }
             return section
         }
-        useEffect(() => {
-            dispatch(getTeethList({}))
-            dispatch(getTeethSectionsList({
-                data: {
-                    GET_CHILDES: true
-                }
-            }))
-        }, [dispatch])
 
         const teethSectionsByPosition: I_TeethSectionsList = {
             leftBottom: sortTeeth(teethSectionsList.find(ts => ts.AREA_VERTICAL === "LEFT" && ts.AREA_HORIZONTALLY === "BOTTOM"), 'ASC'),

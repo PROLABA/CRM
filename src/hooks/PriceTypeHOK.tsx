@@ -1,6 +1,7 @@
 import {ComponentType, FC} from "react";
 import {useAppSelector} from "@/hooks/storeHooks.ts";
-import {I_PriceType} from "@/types/clients.ts";
+
+import {I_PriceType} from "@/types/priceType.ts";
 
 export function PriceTypeHOK<WrappedProps>(
     selected: number,
